@@ -73,13 +73,31 @@ const contactForm = document.getElementById('contactForm');
 const formMessage = document.getElementById('formMessage');
 
 if (contactForm) {
+    console.log('Contact form found');
+    
     contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
+        console.log('Form submitted');
+        
+        // Check if Firebase is initialized
+        if (typeof firebase === 'undefined') {
+            console.error('Firebase is not loaded');
+            showMessage('Firebase is not loaded. Please refresh the page.', 'error');
+            return;
+        }
+        
+        if (typeof database === 'undefined') {
+            console.error('Database is not initialized');
+            showMessage('Database connection failed. Please refresh the page.', 'error');
+            return;
+        }
         
         // Get form values
         const name = document.getElementById('userName').value.trim();
         const email = document.getElementById('userEmail').value.trim();
         const message = document.getElementById('userMessage').value.trim();
+        
+        console.log('Form data:', { name, email, message });
         
         // Validate form
         if (!name || !email || !message) {
@@ -100,6 +118,8 @@ if (contactForm) {
         submitBtn.textContent = 'Sending...';
         
         try {
+            console.log('Attempting to save to Firebase...');
+            
             // Create a new contact entry with unique ID
             const contactRef = database.ref('contacts').push();
             
@@ -113,6 +133,8 @@ if (contactForm) {
                 id: contactRef.key
             });
             
+            console.log('Data saved successfully!');
+            
             // Success message
             showMessage('Thank you! Your message has been sent successfully.', 'success');
             
@@ -121,13 +143,16 @@ if (contactForm) {
             
         } catch (error) {
             console.error('Error submitting form:', error);
-            showMessage('Oops! Something went wrong. Please try again.', 'error');
+            console.error('Error details:', error.message);
+            showMessage('Oops! Something went wrong. Please try again. Error: ' + error.message, 'error');
         } finally {
             // Re-enable submit button
             submitBtn.disabled = false;
             submitBtn.textContent = 'Submit';
         }
     });
+} else {
+    console.error('Contact form not found');
 }
 
 // Show message function
