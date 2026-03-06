@@ -800,6 +800,7 @@ body {
 .project-buttons {
     display: flex;
     gap: 20px;
+    flex-wrap: wrap;
 }
 
 .project-btn {
