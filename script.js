@@ -66,3 +66,78 @@ window.addEventListener('scroll', () => {
         }, 1000);
     }
 });
+
+
+// Contact Form Submission to Firebase Realtime Database
+const contactForm = document.getElementById('contactForm');
+const formMessage = document.getElementById('formMessage');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        // Get form values
+        const name = document.getElementById('userName').value.trim();
+        const email = document.getElementById('userEmail').value.trim();
+        const message = document.getElementById('userMessage').value.trim();
+        
+        // Validate form
+        if (!name || !email || !message) {
+            showMessage('Please fill in all fields', 'error');
+            return;
+        }
+        
+        // Validate email format
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            showMessage('Please enter a valid email address', 'error');
+            return;
+        }
+        
+        // Disable submit button
+        const submitBtn = contactForm.querySelector('.submit-btn');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+        
+        try {
+            // Create a new contact entry with unique ID
+            const contactRef = database.ref('contacts').push();
+            
+            // Save data to Firebase Realtime Database
+            await contactRef.set({
+                name: name,
+                email: email,
+                message: message,
+                timestamp: firebase.database.ServerValue.TIMESTAMP,
+                status: 'new',
+                id: contactRef.key
+            });
+            
+            // Success message
+            showMessage('Thank you! Your message has been sent successfully.', 'success');
+            
+            // Reset form
+            contactForm.reset();
+            
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            showMessage('Oops! Something went wrong. Please try again.', 'error');
+        } finally {
+            // Re-enable submit button
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Submit';
+        }
+    });
+}
+
+// Show message function
+function showMessage(text, type) {
+    formMessage.textContent = text;
+    formMessage.className = `form-message ${type}`;
+    formMessage.style.display = 'block';
+    
+    // Hide message after 5 seconds
+    setTimeout(() => {
+        formMessage.style.display = 'none';
+    }, 5000);
+}
