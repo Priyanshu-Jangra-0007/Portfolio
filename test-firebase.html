@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #000;
+            color: #fff;
+        }
+        .status {
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            background: #1a1a1a;
+        }
+        .success { border-left: 4px solid #00ff88; }
+        .error { border-left: 4px solid #ff0055; }
+        button {
+            padding: 10px 20px;
+            background: #ff0055;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        button:hover {
+            background: #cc0044;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            color: white;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Firebase Connection Test</h1>
+    
+    <div id="status"></div>
+    
+    <h2>Test Form</h2>
+    <input type="text" id="testName" placeholder="Your Name">
+    <input type="email" id="testEmail" placeholder="Your Email">
+    <textarea id="testMessage" placeholder="Your Message" rows="4"></textarea>
+    <button onclick="testSubmit()">Test Submit</button>
+    <button onclick="checkDatabase()">Check Database</button>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    
+    <script>
+        const statusDiv = document.getElementById('status');
+        
+        function addStatus(message, type = 'success') {
+            const div = document.createElement('div');
+            div.className = `status ${type}`;
+            div.textContent = message;
+            statusDiv.appendChild(div);
+            console.log(message);
+        }
+        
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBnwcSW5Ya1DES-V3OdYNRkLfN2ntZUoZI",
+            authDomain: "portfolio-839a8.firebaseapp.com",
+            databaseURL: "https://portfolio-839a8-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "portfolio-839a8",
+            storageBucket: "portfolio-839a8.firebasestorage.app",
+            messagingSenderId: "557595959115",
+            appId: "1:557595959115:web:1d0a4d716bbd1a3c5992ce"
+        };
+
+        try {
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+            addStatus('✓ Firebase initialized successfully');
+            
+            // Initialize Database
+            const database = firebase.database();
+            addStatus('✓ Database initialized successfully');
+            
+            // Test connection
+            database.ref('.info/connected').on('value', (snapshot) => {
+                if (snapshot.val() === true) {
+                    addStatus('✓ Connected to Firebase Realtime Database');
+                } else {
+                    addStatus('✗ Not connected to Firebase', 'error');
+                }
+            });
+            
+        } catch (error) {
+            addStatus('✗ Error: ' + error.message, 'error');
+        }
+        
+        async function testSubmit() {
+            const name = document.getElementById('testName').value;
+            const email = document.getElementById('testEmail').value;
+            const message = document.getElementById('testMessage').value;
+            
+            if (!name || !email || !message) {
+                addStatus('✗ Please fill all fields', 'error');
+                return;
+            }
+            
+            try {
+                addStatus('Sending data to Firebase...');
+                
+                const contactRef = firebase.database().ref('contacts').push();
+                await contactRef.set({
+                    name: name,
+                    email: email,
+                    message: message,
+                    timestamp: firebase.database.ServerValue.TIMESTAMP,
+                    status: 'new',
+                    id: contactRef.key
+                });
+                
+                addStatus('✓ Data saved successfully! ID: ' + contactRef.key);
+                
+                // Clear form
+                document.getElementById('testName').value = '';
+                document.getElementById('testEmail').value = '';
+                document.getElementById('testMessage').value = '';
+                
+            } catch (error) {
+                addStatus('✗ Error saving data: ' + error.message, 'error');
+            }
+        }
+        
+        async function checkDatabase() {
+            try {
+                addStatus('Checking database...');
+                const snapshot = await firebase.database().ref('contacts').limitToLast(5).once('value');
+                
+                if (snapshot.exists()) {
+                    const count = snapshot.numChildren();
+                    addStatus(`✓ Found ${count} contact(s) in database`);
+                    
+                    snapshot.forEach((child) => {
+                        const data = child.val();
+                        addStatus(`- ${data.name} (${data.email})`);
+                    });
+                } else {
+                    addStatus('No contacts found in database yet', 'error');
+                }
+            } catch (error) {
+                addStatus('✗ Error reading database: ' + error.message, 'error');
+            }
+        }
+    </script>
+</body>
+</html>
