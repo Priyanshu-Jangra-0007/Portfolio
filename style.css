@@ -73,9 +73,9 @@ body {
 .hero {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     padding: 0 80px;
-    height: 100vh;
+    min-height: 100vh;
     position: relative;
 }
 
@@ -83,6 +83,7 @@ body {
     flex: 1;
     padding-top: 60px;
     max-width: 600px;
+    z-index: 2;
 }
 
 .subtitle {
@@ -118,6 +119,7 @@ body {
 .cta-buttons {
     display: flex;
     gap: 20px;
+    flex-wrap: wrap;
 }
 
 .btn-primary,
@@ -153,9 +155,11 @@ body {
 
 .hero-image {
     position: absolute;
-    top: 14px;
+    top: 50%;
     right: 80px;
+    transform: translateY(-50%);
     max-width: 400px;
+    z-index: 1;
 }
 
 .hero-image img {
@@ -163,29 +167,84 @@ body {
     height: auto;
 }
 
+@media (max-width: 1024px) {
+    .hero {
+        padding: 0 40px;
+    }
+
+    .hero-image {
+        right: 40px;
+        max-width: 350px;
+    }
+
+    .hero-title {
+        font-size: 56px;
+    }
+}
+
 @media (max-width: 768px) {
     .navbar {
         padding: 20px 30px;
+        flex-wrap: wrap;
     }
 
     .nav-links {
-        gap: 20px;
+        gap: 15px;
         font-size: 14px;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+        margin-top: 10px;
     }
 
     .hero {
         flex-direction: column;
         padding: 40px 30px;
         text-align: center;
+        min-height: auto;
+        padding-top: 100px;
+        padding-bottom: 60px;
+    }
+
+    .hero-content {
+        max-width: 100%;
+        padding-top: 0;
+        z-index: 2;
     }
 
     .hero-title {
-        font-size: 48px;
+        font-size: 42px;
+    }
+
+    .subtitle {
+        font-size: 16px;
+    }
+
+    .description {
+        font-size: 16px;
+        max-width: 100%;
+    }
+
+    .cta-buttons {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        flex: 1;
+        min-width: 140px;
+        text-align: center;
     }
 
     .hero-image {
+        position: relative;
+        top: auto;
+        right: auto;
+        transform: none;
         margin-top: 40px;
-        justify-content: center;
+        max-width: 300px;
+        width: 100%;
     }
 }
 
@@ -308,20 +367,75 @@ body {
         padding: 40px 30px;
         overflow-y: auto;
         height: auto;
+        min-height: 100vh;
     }
 
     .about-image {
         flex: 0 0 auto;
         width: 100%;
         max-width: 300px;
+        margin: 0 auto;
+        padding: 30px;
+    }
+
+    .about-content {
+        width: 100%;
     }
 
     .about-title {
         font-size: 36px;
+        text-align: center;
+    }
+
+    .about-description {
+        font-size: 15px;
+        text-align: center;
     }
 
     .tabs {
         gap: 15px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .tab-btn {
+        font-size: 14px;
+    }
+
+    .skill-item h3 {
+        font-size: 16px;
+    }
+
+    .skill-item p {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-section {
+        padding: 30px 20px;
+    }
+
+    .about-image {
+        max-width: 250px;
+        padding: 20px;
+    }
+
+    .about-title {
+        font-size: 28px;
+    }
+
+    .about-description {
+        font-size: 14px;
+    }
+
+    .tabs {
+        gap: 10px;
+    }
+
+    .tab-btn {
+        font-size: 13px;
+        padding: 8px 0;
     }
 }
 
@@ -549,8 +663,58 @@ body {
         margin-bottom: 40px;
     }
 
+    .education-column {
+        padding: 25px;
+    }
+
+    .column-title {
+        font-size: 24px;
+    }
+
     .skills-grid {
         grid-template-columns: 1fr;
+    }
+
+    .skill-badge {
+        padding: 12px;
+    }
+
+    .tech-item {
+        padding: 12px;
+    }
+
+    .achievement-card {
+        padding: 25px;
+    }
+
+    .achievement-card h3 {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .education-section {
+        padding: 30px 20px;
+    }
+
+    .education-title {
+        font-size: 28px;
+    }
+
+    .education-column {
+        padding: 20px;
+    }
+
+    .column-title {
+        font-size: 20px;
+    }
+
+    .education-card {
+        padding: 20px;
+    }
+
+    .education-card h3 {
+        font-size: 18px;
     }
 }
 
@@ -747,6 +911,40 @@ body {
 
     .project-btn {
         justify-content: center;
+        width: 100%;
+    }
+
+    .scroll-indicator {
+        margin-top: 30px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .portfolio-title {
+        font-size: 28px;
+    }
+
+    .portfolio-slider {
+        padding: 0 20px;
+        gap: 40px;
+    }
+
+    .project-image {
+        height: 200px;
+    }
+
+    .project-details h2 {
+        font-size: 24px;
+    }
+
+    .project-details p {
+        font-size: 14px;
+    }
+
+    .project-btn {
+        padding: 12px 20px;
+        font-size: 14px;
     }
 }
 
@@ -868,25 +1066,72 @@ body {
 }
 
 @media (max-width: 768px) {
-    .portfolio-section,
-    .contact-section {
-        padding: 40px 30px;
-        height: auto;
-    }
-
-    .portfolio-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .portfolio-title,
-    .contact-title {
-        font-size: 36px;
-        margin-bottom: 40px;
-    }
-
     .contact-section {
         flex-direction: column;
+        padding: 40px 30px;
+        height: auto;
+        min-height: 100vh;
         gap: 40px;
+    }
+
+    .contact-title {
+        font-size: 36px;
+        text-align: center;
+    }
+
+    .contact-item {
+        font-size: 14px;
+        justify-content: center;
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+
+    .download-cv-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .contact-form {
+        width: 100%;
+    }
+
+    .form-input,
+    .form-textarea {
+        font-size: 14px;
+    }
+
+    .submit-btn {
+        width: 100%;
+        text-align: center;
+        align-self: stretch;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-section {
+        padding: 30px 20px;
+    }
+
+    .contact-title {
+        font-size: 28px;
+    }
+
+    .contact-item {
+        font-size: 13px;
+        flex-direction: column;
+        text-align: center;
+        gap: 5px;
+    }
+
+    .social-icons {
+        gap: 15px;
+    }
+
+    .social-icon {
+        width: 40px;
+        height: 40px;
     }
 }
 
