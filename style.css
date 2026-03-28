@@ -158,13 +158,17 @@ body {
     top: 50%;
     right: 80px;
     transform: translateY(-50%);
-    max-width: 400px;
+    max-width: 500px;
     z-index: 1;
 }
 
 .hero-image img {
     max-width: 100%;
     height: auto;
+    display: block;
+    filter: contrast(1.08) saturate(1.04);
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
 }
 
 @media (max-width: 1024px) {
@@ -174,7 +178,7 @@ body {
 
     .hero-image {
         right: 40px;
-        max-width: 350px;
+        max-width: 420px;
     }
 
     .hero-title {
@@ -243,7 +247,7 @@ body {
         right: auto;
         transform: none;
         margin-top: 40px;
-        max-width: 300px;
+        max-width: 340px;
         width: 100%;
     }
 }
@@ -261,7 +265,7 @@ body {
 
 .about-image {
     flex: 0 0 400px;
-    background: linear-gradient(145deg, #1a1a1a, #2d2d2d);
+    background: #000;
     border-radius: 20px;
     padding: 40px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
