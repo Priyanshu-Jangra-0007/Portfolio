@@ -854,13 +854,58 @@
   <!-- Footer Section -->
   <footer class="app-footer-section">
     <div class="footer-container">
-      <div class="footer-divider"></div>
-      <div class="footer-content">
-        <div class="footer-left">
-          <p class="footer-copy">&copy; 2026 Priyanshu. All rights reserved.</p>
+      <div class="footer-grid">
+        <!-- Column 1: Brand & Bio -->
+        <div class="footer-col footer-brand-col">
+          <div class="logo">
+            <svg class="logo-airplane-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 3L29 16L3 29L8 16L3 3Z" fill="rgba(255,255,255,0.9)" stroke="rgba(255,255,255,0.6)"
+                stroke-width="0.8" stroke-linejoin="round" />
+              <path d="M8 16L29 16" stroke="rgba(255,255,255,0.4)" stroke-width="0.8" />
+            </svg>
+            <span class="logo-text">Myfolio</span>
+          </div>
+          <p class="footer-bio">
+            Frontend Developer & React enthusiast crafting premium user experiences and solving algorithmic challenges.
+          </p>
+          <div class="footer-socials">
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/priyanshujangra__/" target="_blank" rel="noopener noreferrer"
+              class="social-link-btn instagram-btn" aria-label="Instagram Profile">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" class="social-icon" aria-hidden="true">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </a>
+            <!-- GitHub -->
+            <a href="https://github.com/Priyanshu-Jangra-0007" target="_blank" rel="noopener noreferrer"
+              class="social-link-btn github-btn" aria-label="GitHub Profile">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" class="social-icon" aria-hidden="true">
+                <path
+                  d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                </path>
+              </svg>
+            </a>
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com/in/priyanshujangra/" target="_blank" rel="noopener noreferrer"
+              class="social-link-btn linkedin-btn" aria-label="LinkedIn Profile">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" class="social-icon" aria-hidden="true">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
+            </a>
+          </div>
         </div>
-        <div class="footer-right">
-          <ul class="footer-nav">
+
+        <!-- Column 2: Navigation Links -->
+        <div class="footer-col">
+          <h4 class="footer-title">Navigation</h4>
+          <ul class="footer-links-list">
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#projects">Projects</a></li>
@@ -868,6 +913,50 @@
             <li><a href="#contacts">Contacts</a></li>
           </ul>
         </div>
+
+        <!-- Column 3: Coding Profiles -->
+        <div class="footer-col">
+          <h4 class="footer-title">Coding Profiles</h4>
+          <ul class="footer-links-list">
+            <li><a href="https://leetcode.com/priyanshujangra__/" target="_blank" rel="noopener noreferrer">LeetCode</a></li>
+            <li><a href="https://www.codechef.com/users/priyanshujangra__" target="_blank" rel="noopener noreferrer">CodeChef</a></li>
+            <li><a href="https://codolio.com/profile/priyanshujangra__" target="_blank" rel="noopener noreferrer">Codolio</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Contact & Availability -->
+        <div class="footer-col">
+          <h4 class="footer-title">Get In Touch</h4>
+          <ul class="footer-links-list footer-contact-info">
+            <li>
+              <span class="info-label">Email</span>
+              <a href="mailto:priyanshujangra145@gmail.com">priyanshujangra145@gmail.com</a>
+            </li>
+            <li>
+              <span class="info-label">Location</span>
+              <span>Haryana, India</span>
+            </li>
+            <li>
+              <span class="info-label">Status</span>
+              <div class="footer-status-badge">
+                <span class="status-dot"></span>
+                <span class="status-text">Available for roles</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-divider"></div>
+
+      <!-- Footer Thanks / Airplane Landing Zone -->
+      <div class="footer-thanks-container">
+        <span id="thanks-text" class="thanks-text">Thanks For Visiting</span>
+      </div>
+
+      <!-- Copyright Info -->
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2026 Priyanshu. All rights reserved.</p>
       </div>
     </div>
   </footer>

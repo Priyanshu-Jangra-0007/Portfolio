@@ -432,6 +432,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const airplane = document.getElementById('paper-airplane');
   const logoIcon = document.querySelector('.logo-airplane-icon');
   const logo = document.getElementById('site-logo');
+  const thanksText = document.getElementById('thanks-text');
+  const thanksContainer = document.querySelector('.footer-thanks-container');
+  
   let currentT = 0;
   let targetT = 0;
   let currentAngle = 0; // Track current rotation angle for smooth interpolation
@@ -465,10 +468,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // The starting coordinate is the logo's position relative to the viewport at scroll = 0
     const start = { x: initialLogoPos.x, y: initialLogoPos.y };
 
-    // Y: from logo position down to bottom of viewport
-    const y = start.y + t * (h - start.y - 40);
+    // Base Y: from logo position down to bottom of viewport
+    const baseY = start.y + t * (h - start.y - 40);
 
-    // X: starts at logo X, S-curves 3.5 times across the viewport
+    // Base X: starts at logo X, S-curves 3.5 times across the viewport
     const rightEdge = w - 80;
     const leftEdge = 80;
     const centerX = (rightEdge + leftEdge) / 2;
@@ -479,7 +482,24 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Smooth wide S-curve trajectory
     const targetX = centerX + Math.sin(t * Math.PI * 3.5 - Math.PI / 2) * amplitude;
-    const x = start.x + (targetX - start.x) * blend;
+    const baseX = start.x + (targetX - start.x) * blend;
+
+    let x = baseX;
+    let y = baseY;
+
+    // Transition to the landing zone in the last 5% of scroll
+    if (t > 0.95 && thanksContainer) {
+      const landingRect = thanksContainer.getBoundingClientRect();
+      const landingX = landingRect.left + landingRect.width / 2;
+      const landingY = landingRect.top + landingRect.height / 2;
+
+      const landingBlend = (t - 0.95) / 0.05;
+      // Use smooth step or ease-in-out for the transition
+      const easeBlend = landingBlend * landingBlend * (3 - 2 * landingBlend);
+
+      x = baseX + (landingX - baseX) * easeBlend;
+      y = baseY + (landingY - baseY) * easeBlend;
+    }
 
     return { x, y };
   }
@@ -504,52 +524,40 @@ document.addEventListener('DOMContentLoaded', () => {
     const diff = targetT - currentT;
     if (Math.abs(diff) > 0.0002) {
       currentT += diff * 0.08; // Smooth interpolation speed factor
-      
-      if (currentT < 0.005) {
-        parkAirplane();
-      } else {
-        logoIcon.style.opacity = '0';
-        airplane.style.opacity = '1';
-
-        const pos = getPosition(currentT);
-        
-        // Smoothly interpolate rotation angle to prevent takeoff snaps
-        const targetAngle = getAngle(currentT);
-        let angleDiff = targetAngle - currentAngle;
-        while (angleDiff < -Math.PI) angleDiff += Math.PI * 2;
-        while (angleDiff > Math.PI) angleDiff -= Math.PI * 2;
-        currentAngle += angleDiff * 0.12;
-
-        // Fly behind the navbar (z-index 1000) and behind the hero text (z-index 12) but above page sections (z-index 2-5)
-        airplane.style.zIndex = '10';
-
-        airplane.style.transform = `translate(${pos.x - 12}px, ${pos.y - 12}px) rotate(${currentAngle}rad)`;
-      }
-      
       animationFrameId = requestAnimationFrame(animateAirplane);
     } else {
       currentT = targetT;
-      if (currentT < 0.005) {
-        parkAirplane();
-      } else {
-        logoIcon.style.opacity = '0';
-        airplane.style.opacity = '1';
-
-        const pos = getPosition(currentT);
-        
-        // Smoothly interpolate rotation angle to prevent takeoff snaps
-        const targetAngle = getAngle(currentT);
-        let angleDiff = targetAngle - currentAngle;
-        while (angleDiff < -Math.PI) angleDiff += Math.PI * 2;
-        while (angleDiff > Math.PI) angleDiff -= Math.PI * 2;
-        currentAngle += angleDiff * 0.12;
-
-        // Fly behind the navbar (z-index 1000) and behind the hero text (z-index 12) but above page sections (z-index 2-5)
-        airplane.style.zIndex = '10';
-
-        airplane.style.transform = `translate(${pos.x - 12}px, ${pos.y - 12}px) rotate(${currentAngle}rad)`;
-      }
       animationFrameId = null;
+    }
+
+    if (currentT < 0.005) {
+      parkAirplane();
+      if (thanksText) thanksText.classList.remove('visible');
+    } else {
+      logoIcon.style.opacity = '0';
+      
+      // Handle landing visibility and opacity
+      if (currentT > 0.97) {
+        if (thanksText) thanksText.classList.add('visible');
+        const landingOpacity = Math.max(0, 1 - (currentT - 0.97) / 0.03);
+        airplane.style.opacity = landingOpacity.toString();
+      } else {
+        if (thanksText) thanksText.classList.remove('visible');
+        airplane.style.opacity = '1';
+      }
+
+      const pos = getPosition(currentT);
+      
+      // Smoothly interpolate rotation angle to prevent takeoff snaps
+      const targetAngle = getAngle(currentT);
+      let angleDiff = targetAngle - currentAngle;
+      while (angleDiff < -Math.PI) angleDiff += Math.PI * 2;
+      while (angleDiff > Math.PI) angleDiff -= Math.PI * 2;
+      currentAngle += angleDiff * 0.12;
+
+      // Fly behind the navbar (z-index 1000) and behind the hero text (z-index 12) but above page sections (z-index 2-5)
+      airplane.style.zIndex = '10';
+      airplane.style.transform = `translate(${pos.x - 12}px, ${pos.y - 12}px) rotate(${currentAngle}rad)`;
     }
   }
 
@@ -572,9 +580,19 @@ document.addEventListener('DOMContentLoaded', () => {
     currentT = targetT;
     if (currentT < 0.005) {
       parkAirplane();
+      if (thanksText) thanksText.classList.remove('visible');
     } else {
       logoIcon.style.opacity = '0';
-      airplane.style.opacity = '1';
+      
+      if (currentT > 0.97) {
+        if (thanksText) thanksText.classList.add('visible');
+        const landingOpacity = Math.max(0, 1 - (currentT - 0.97) / 0.03);
+        airplane.style.opacity = landingOpacity.toString();
+      } else {
+        if (thanksText) thanksText.classList.remove('visible');
+        airplane.style.opacity = '1';
+      }
+
       const pos = getPosition(currentT);
       currentAngle = getAngle(currentT); // Set instantly on resize
       airplane.style.zIndex = '10';
