@@ -2031,6 +2031,44 @@ body.menu-open {
   letter-spacing: 0.05em;
 }
 
+/* Project Links */
+.project-links {
+  display: flex;
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.project-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.project-link-btn:hover {
+  color: #38bdf8;
+  transform: translateY(-1px);
+}
+
+.project-link-btn .link-icon {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  fill: none;
+  transition: stroke 0.2s ease;
+}
+
+.project-link-btn:hover .link-icon {
+  stroke: #38bdf8;
+}
+
 /* Responsive */
 @media (max-width: 992px) {
   .projects-grid {
