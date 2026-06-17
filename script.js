@@ -62,6 +62,41 @@ navLinks.forEach(link => {
 
 // Start on load and init custom cursor
 document.addEventListener('DOMContentLoaded', () => {
+  // Mobile Menu Toggle
+  const menuToggle = document.getElementById('menu-toggle');
+  const navRightGroup = document.getElementById('nav-right-group');
+  
+  if (menuToggle && navRightGroup) {
+    menuToggle.addEventListener('click', () => {
+      const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+      menuToggle.setAttribute('aria-expanded', !isExpanded);
+      menuToggle.classList.toggle('active');
+      navRightGroup.classList.toggle('active');
+      document.body.classList.toggle('menu-open');
+    });
+
+    // Close menu when clicking links
+    const mobileNavLinks = navRightGroup.querySelectorAll('.nav-links a');
+    mobileNavLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.classList.remove('active');
+        navRightGroup.classList.remove('active');
+        document.body.classList.remove('menu-open');
+      });
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!menuToggle.contains(e.target) && !navRightGroup.contains(e.target) && navRightGroup.classList.contains('active')) {
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.classList.remove('active');
+        navRightGroup.classList.remove('active');
+        document.body.classList.remove('menu-open');
+      }
+    });
+  }
+
   // Shared Application Tooltip
   const tooltip = document.createElement('div');
   tooltip.id = 'app-tooltip';
@@ -441,22 +476,20 @@ document.addEventListener('DOMContentLoaded', () => {
   let animationFrameId = null;
   let initialLogoPos = { x: 0, y: 0 };
 
-  // Cache initial logo position relative to page scroll
+  // Cache initial logo position relative to viewport
   function updateLogoBasePos() {
-    const scrollTop = window.scrollY || document.documentElement.scrollTop;
     const rect = logoIcon.getBoundingClientRect();
     initialLogoPos = {
       x: rect.left + rect.width / 2,
-      y: rect.top + scrollTop + rect.height / 2
+      y: rect.top + rect.height / 2
     };
   }
 
   // Get current logo icon viewport position for parking
   function getLogoPos() {
-    const scrollTop = window.scrollY || document.documentElement.scrollTop;
     return {
       x: initialLogoPos.x,
-      y: initialLogoPos.y - scrollTop
+      y: initialLogoPos.y
     };
   }
 

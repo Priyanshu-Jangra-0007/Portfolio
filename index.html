@@ -40,8 +40,15 @@
         <span class="logo-text">Myfolio</span>
       </div>
 
+      <!-- Hamburger Menu Toggle Button -->
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle Navigation" aria-expanded="false" aria-controls="nav-right-group">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+
       <!-- Right side: Links & Social profiles grouped together -->
-      <div class="nav-right-group">
+      <div class="nav-right-group" id="nav-right-group">
         <ul class="nav-links">
           <li><a href="#home" class="active">Home</a></li>
           <li><a href="#about">About</a></li>
@@ -311,8 +318,6 @@
       </div>
 
       <div class="hex-grid" id="hex-grid">
-        <!-- Row 1: 6 items -->
-        <div class="hex-row">
           <div class="hex-item" data-name="React.js" data-percent="90" data-level="Expert"
             data-desc="Hooks, State Management, Custom Hooks, Context API" data-color="#00d8ff">
             <div class="hex-shape">
@@ -433,11 +438,8 @@
               </div>
             </div>
           </div>
-        </div>
 
-        <!-- Row 2: 5 items (offset) -->
-        <div class="hex-row hex-row-offset">
-          <div class="hex-item" data-name="Supabase" data-percent="88" data-level="Advanced"
+        <div class="hex-item" data-name="Supabase" data-percent="88" data-level="Advanced"
             data-desc="PostgreSQL, Realtime DB, Row-Level Security, Edge Functions" data-color="#3ecf8e">
             <div class="hex-shape">
               <svg class="hex-bg" viewBox="0 0 120 104" preserveAspectRatio="none">
@@ -545,7 +547,6 @@
             </div>
           </div>
         </div>
-      </div>
     </div>
   </section>
 
@@ -778,28 +779,6 @@
             </div>
             <div class="cp-card-arrow">↗</div>
           </a>
-        </div>
-
-        <!-- Right: Core Focus Areas -->
-        <div class="cp-focus-panel">
-          <div class="cp-panel-header">
-            <h3 class="cp-panel-title">Core Areas of Focus</h3>
-            <span class="cp-panel-subtitle">Key algorithmic topics & data structures</span>
-          </div>
-          <div class="cp-tags-container">
-            <span class="cp-tag-pill">Dynamic Programming</span>
-            <span class="cp-tag-pill">Graph Theory</span>
-            <span class="cp-tag-pill">Binary Search</span>
-            <span class="cp-tag-pill">Segment Trees</span>
-            <span class="cp-tag-pill">Two Pointers</span>
-            <span class="cp-tag-pill">Greedy Algorithms</span>
-            <span class="cp-tag-pill">Bit Manipulation</span>
-            <span class="cp-tag-pill">Trie</span>
-            <span class="cp-tag-pill">Backtracking</span>
-            <span class="cp-tag-pill">Union Find</span>
-            <span class="cp-tag-pill">Memoization</span>
-            <span class="cp-tag-pill">Sliding Window</span>
-          </div>
         </div>
       </div>
     </div>
