@@ -274,7 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Hover feedback for all interactive elements
-  const interactiveElements = document.querySelectorAll('a, button, .social-link-btn, .compiler-card, .info-pill, .github-stat-card, .github-matrix-card');
+  const interactiveElements = document.querySelectorAll('a, button, .social-link-btn, .compiler-card, .info-pill, .github-stat-card, .github-matrix-card, .footer-metric');
   interactiveElements.forEach(el => {
     el.addEventListener('mouseenter', () => {
       cursor.classList.add('hover');

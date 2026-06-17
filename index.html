@@ -796,6 +796,83 @@
             <div class="cp-card-arrow">↗</div>
           </a>
         </div>
+
+        <!-- Right Column: Interactive DSA Dashboard -->
+        <div class="cp-focus-panel">
+          <div class="cp-panel-header">
+            <h3 class="cp-panel-title">LeetCode Metrics</h3>
+            <p class="cp-panel-subtitle">Real-time status of problem-solving milestone</p>
+          </div>
+          
+          <div class="dashboard-content">
+            <!-- Difficulty Progress Rings -->
+            <div class="stats-circle-wrapper">
+              <div class="progress-ring-container">
+                <svg class="progress-ring" viewBox="0 0 120 120">
+                  <circle class="ring-bg" cx="60" cy="60" r="50"></circle>
+                  <circle class="ring-progress ring-easy" cx="60" cy="60" r="50" style="stroke-dasharray: 314.16; stroke-dashoffset: 62.83;"></circle> <!-- 80% -->
+                  <circle class="ring-progress ring-medium" cx="60" cy="60" r="40" style="stroke-dasharray: 251.32; stroke-dashoffset: 75.39;"></circle> <!-- 70% -->
+                  <circle class="ring-progress ring-hard" cx="60" cy="60" r="30" style="stroke-dasharray: 188.49; stroke-dashoffset: 94.24;"></circle> <!-- 50% -->
+                </svg>
+                <div class="ring-center-text">
+                  <span class="total-solved-num">1000+</span>
+                  <span class="total-solved-lbl">SOLVED</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Difficulty Bars -->
+            <div class="stats-details-list">
+              <div class="stat-detail-item easy">
+                <div class="detail-label-row">
+                  <span class="detail-name">Easy</span>
+                  <span class="detail-count">420</span>
+                </div>
+                <div class="detail-bar-bg">
+                  <div class="detail-bar-fill fill-easy" style="width: 80%;"></div>
+                </div>
+              </div>
+
+              <div class="stat-detail-item medium">
+                <div class="detail-label-row">
+                  <span class="detail-name">Medium</span>
+                  <span class="detail-count">480</span>
+                </div>
+                <div class="detail-bar-bg">
+                  <div class="detail-bar-fill fill-medium" style="width: 70%;"></div>
+                </div>
+              </div>
+
+              <div class="stat-detail-item hard">
+                <div class="detail-label-row">
+                  <span class="detail-name">Hard</span>
+                  <span class="detail-count">100</span>
+                </div>
+                <div class="detail-bar-bg">
+                  <div class="detail-bar-fill fill-hard" style="width: 50%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dashboard Achievements Footer -->
+          <div class="dashboard-footer">
+            <div class="footer-metric">
+              <span class="metric-icon">🏆</span>
+              <div class="metric-text">
+                <span class="metric-val">1550+</span>
+                <span class="metric-lbl">LeetCode Rating</span>
+              </div>
+            </div>
+            <div class="footer-metric">
+              <span class="metric-icon">🔥</span>
+              <div class="metric-text">
+                <span class="metric-val">120+</span>
+                <span class="metric-lbl">Active Streak</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
