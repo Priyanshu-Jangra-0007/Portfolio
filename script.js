@@ -272,9 +272,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }, 1000);
   }
-
   // Hover feedback for all interactive elements
-  const interactiveElements = document.querySelectorAll('a, button, .social-link-btn, .compiler-card, .info-pill, .github-stat-card, .github-matrix-card, .footer-metric');
+  const interactiveElements = document.querySelectorAll('a, button, .social-link-btn, .compiler-card, .info-pill, .github-stat-card, .github-matrix-card, .footer-metric, .cp-flip-card-front, .cp-flip-card-back, .conn-icon, .back-stat-item');
   interactiveElements.forEach(el => {
     el.addEventListener('mouseenter', () => {
       cursor.classList.add('hover');
