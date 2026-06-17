@@ -2195,7 +2195,7 @@ body.menu-open {
   display: grid;
   grid-template-columns: 1.3fr 1fr;
   gap: 2rem;
-  align-items: start;
+  align-items: stretch;
 }
 
 /* Platforms Grid (2x2) */
@@ -2408,7 +2408,7 @@ body.menu-open {
   left: 0;
   width: 100%;
   height: 4px;
-  background: linear-gradient(90deg, #34d399, #ffa116, #f43f5e);
+  background: linear-gradient(90deg, #243748, #4B749F, #38bdf8);
   opacity: 0.85;
 }
 
@@ -2478,17 +2478,17 @@ body.menu-open {
 }
 
 .ring-easy {
-  stroke: #34d399; /* LeetCode Easy Green */
+  stroke: #38bdf8; /* Portfolio Light Blue */
   stroke-width: 8;
 }
 
 .ring-medium {
-  stroke: #ffa116; /* LeetCode Medium Yellow */
+  stroke: #4b749f; /* Portfolio Slate Blue */
   stroke-width: 8;
 }
 
 .ring-hard {
-  stroke: #f43f5e; /* LeetCode Hard Red */
+  stroke: rgba(255, 255, 255, 0.6); /* Portfolio Muted White */
   stroke-width: 8;
 }
 
@@ -2542,9 +2542,9 @@ body.menu-open {
   font-weight: 600;
 }
 
-.stat-detail-item.easy .detail-name { color: #34d399; }
-.stat-detail-item.medium .detail-name { color: #ffa116; }
-.stat-detail-item.hard .detail-name { color: #f43f5e; }
+.stat-detail-item.easy .detail-name { color: #38bdf8; }
+.stat-detail-item.medium .detail-name { color: #4b749f; }
+.stat-detail-item.hard .detail-name { color: rgba(255, 255, 255, 0.7); }
 
 .detail-count {
   color: #ffffff;
@@ -2567,9 +2567,9 @@ body.menu-open {
   transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.fill-easy { background: #34d399; }
-.fill-medium { background: #ffa116; }
-.fill-hard { background: #f43f5e; }
+.fill-easy { background: #38bdf8; }
+.fill-medium { background: #4b749f; }
+.fill-hard { background: rgba(255, 255, 255, 0.6); }
 
 .dashboard-footer {
   display: grid;
@@ -2577,7 +2577,7 @@ body.menu-open {
   gap: 1rem;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   padding-top: 1.25rem;
-  margin-top: 0.25rem;
+  margin-top: auto;
 }
 
 .footer-metric {
