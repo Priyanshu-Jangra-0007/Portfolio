@@ -565,7 +565,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (currentT < 0.005) {
       parkAirplane();
-      if (thanksText) thanksText.classList.remove('visible');
     } else {
       logoIcon.style.opacity = '0';
       
@@ -575,7 +574,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const landingOpacity = Math.max(0, 1 - (currentT - 0.97) / 0.03);
         airplane.style.opacity = landingOpacity.toString();
       } else {
-        if (thanksText) thanksText.classList.remove('visible');
         airplane.style.opacity = '1';
       }
 
@@ -613,7 +611,6 @@ document.addEventListener('DOMContentLoaded', () => {
     currentT = targetT;
     if (currentT < 0.005) {
       parkAirplane();
-      if (thanksText) thanksText.classList.remove('visible');
     } else {
       logoIcon.style.opacity = '0';
       
@@ -622,7 +619,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const landingOpacity = Math.max(0, 1 - (currentT - 0.97) / 0.03);
         airplane.style.opacity = landingOpacity.toString();
       } else {
-        if (thanksText) thanksText.classList.remove('visible');
         airplane.style.opacity = '1';
       }
 
