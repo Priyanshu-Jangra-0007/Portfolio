@@ -2393,6 +2393,7 @@ body.menu-open {
   box-shadow: none;
   padding: 0;
   height: 100%;
+  cursor: pointer;
 }
 
 .cp-flip-card {
@@ -2404,7 +2405,13 @@ body.menu-open {
   transform-style: preserve-3d;
 }
 
-.cp-flip-card-container:hover .cp-flip-card {
+@media (hover: hover) {
+  .cp-flip-card-container:hover .cp-flip-card {
+    transform: rotateY(180deg);
+  }
+}
+
+.cp-flip-card-container.clicked .cp-flip-card {
   transform: rotateY(180deg);
 }
 
@@ -2438,7 +2445,14 @@ body.menu-open {
   transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 
-.cp-flip-card-container:hover .codolio-card-img {
+@media (hover: hover) {
+  .cp-flip-card-container:hover .codolio-card-img {
+    border-color: rgba(56, 189, 248, 0.3);
+    box-shadow: 0 20px 45px rgba(56, 189, 248, 0.15);
+  }
+}
+
+.cp-flip-card-container.clicked .codolio-card-img {
   border-color: rgba(56, 189, 248, 0.3);
   box-shadow: 0 20px 45px rgba(56, 189, 248, 0.15);
 }

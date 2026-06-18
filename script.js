@@ -457,7 +457,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   loadGitHubActivity('Priyanshu-Jangra-0007');
 
-
+  // Toggle flip card on click/tap for both desktop and mobile
+  const flipCardContainer = document.querySelector('.cp-flip-card-container');
+  if (flipCardContainer) {
+    flipCardContainer.addEventListener('click', () => {
+      flipCardContainer.classList.toggle('clicked');
+    });
+  }
 
 });
 
