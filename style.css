@@ -2563,8 +2563,25 @@ body.menu-open {
 }
 
 @media (max-width: 992px) {
-  .cp-flip-card-container, .li-badge-wrapper {
+  .cp-flip-card-container {
     min-height: 380px;
+  }
+  .li-badge-wrapper {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    overflow: visible !important;
+    min-height: auto !important;
+  }
+}
+
+@media (max-width: 350px) {
+  .li-badge-wrapper .LI-profile-badge {
+    transform: scale(0.85);
+    transform-origin: center center;
   }
 }
 
