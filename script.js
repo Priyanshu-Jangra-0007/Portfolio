@@ -273,7 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 1000);
   }
   // Hover feedback for all interactive elements
-  const interactiveElements = document.querySelectorAll('a, button, .social-link-btn, .compiler-card, .info-pill, .github-stat-card, .github-matrix-card, .footer-metric, .cp-flip-card-front, .cp-flip-card-back, .conn-icon, .back-stat-item');
+  const interactiveElements = document.querySelectorAll('a, button, .social-link-btn, .compiler-card, .info-pill, .github-stat-card, .github-matrix-card, .footer-metric, .cp-flip-card-front, .cp-flip-card-back, .conn-icon, .back-stat-item, .li-badge-wrapper');
   interactiveElements.forEach(el => {
     el.addEventListener('mouseenter', () => {
       cursor.classList.add('hover');
@@ -463,6 +463,39 @@ document.addEventListener('DOMContentLoaded', () => {
     flipCardContainer.addEventListener('click', () => {
       flipCardContainer.classList.toggle('clicked');
     });
+  }
+
+  // Disable scrollbars and hide fallback link on the LinkedIn badge iframe once loaded
+  const badgeObserver = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      mutation.addedNodes.forEach((node) => {
+        const isIframe = node.tagName === 'IFRAME';
+        const iframeList = node.querySelectorAll ? node.querySelectorAll('iframe') : [];
+        
+        if (isIframe || iframeList.length > 0) {
+          const iframes = isIframe ? [node] : Array.from(iframeList);
+          iframes.forEach(iframe => iframe.setAttribute('scrolling', 'no'));
+          
+          const fallbackLink = badgeWrapper.querySelector('.LI-simple-link');
+          if (fallbackLink) {
+            fallbackLink.style.setProperty('display', 'none', 'important');
+          }
+        }
+      });
+    });
+  });
+
+  const badgeWrapper = document.querySelector('.li-badge-wrapper');
+  if (badgeWrapper) {
+    badgeObserver.observe(badgeWrapper, { childList: true, subtree: true });
+    const existingIframe = badgeWrapper.querySelector('iframe');
+    if (existingIframe) {
+      existingIframe.setAttribute('scrolling', 'no');
+      const fallbackLink = badgeWrapper.querySelector('.LI-simple-link');
+      if (fallbackLink) {
+        fallbackLink.style.setProperty('display', 'none', 'important');
+      }
+    }
   }
 
 });

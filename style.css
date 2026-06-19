@@ -2193,7 +2193,7 @@ body.menu-open {
 /* Content Split Layout */
 .cp-content-layout {
   display: grid;
-  grid-template-columns: 1.3fr 1fr;
+  grid-template-columns: 1.3fr 1fr 1fr;
   gap: 2rem;
   align-items: stretch;
 }
@@ -2457,8 +2457,113 @@ body.menu-open {
   box-shadow: 0 20px 45px rgba(56, 189, 248, 0.15);
 }
 
+/* LinkedIn Profile Badge styling */
+.li-badge-wrapper {
+  background: rgba(10, 10, 15, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  height: 100%;
+}
+
+.li-badge-wrapper:hover {
+  border-color: rgba(0, 119, 181, 0.35);
+  box-shadow: 0 20px 45px rgba(0, 119, 181, 0.2);
+  transform: translateY(-5px);
+}
+
+/* Fallback card styles for LinkedIn profile badge when script doesn't load or is blocked */
+.li-badge-wrapper .LI-profile-badge {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.li-badge-wrapper .LI-simple-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  color: #ffffff;
+  text-decoration: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  padding: 2.5rem 1.5rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.02);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.li-badge-wrapper .LI-simple-link:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(0, 119, 181, 0.2);
+}
+
+.li-badge-wrapper .LI-simple-link::before {
+  content: '';
+  display: block;
+  width: 54px;
+  height: 54px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230077b5'%3E%3Cpath d='M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  filter: drop-shadow(0 0 10px rgba(0, 119, 181, 0.3));
+}
+
+.li-badge-wrapper .LI-simple-link::after {
+  content: 'View LinkedIn Profile';
+  display: inline-block;
+  padding: 0.7rem 1.4rem;
+  background: rgba(0, 119, 181, 0.2);
+  border: 1px solid rgba(0, 119, 181, 0.4);
+  border-radius: 30px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #0077b5;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 10px rgba(0, 119, 181, 0.1);
+}
+
+.li-badge-wrapper:hover .LI-simple-link::after {
+  background: #0077b5;
+  color: #ffffff;
+  box-shadow: 0 8px 20px rgba(0, 119, 181, 0.4);
+  border-color: #0077b5;
+  transform: translateY(-1px);
+}
+
+/* Hide fallback link card when script renders the official badge successfully */
+.li-badge-wrapper .LI-profile-badge[data-rendered="true"] .LI-simple-link {
+  display: none !important;
+}
+
+/* Ensure no scrollbars render on the LinkedIn iframe widget */
+.li-badge-wrapper iframe {
+  overflow: hidden !important;
+  scrollbar-width: none !important; /* Firefox */
+}
+.li-badge-wrapper iframe::-webkit-scrollbar {
+  display: none !important; /* Webkit */
+}
+
 @media (max-width: 992px) {
-  .cp-flip-card-container {
+  .cp-flip-card-container, .li-badge-wrapper {
     min-height: 380px;
   }
 }
