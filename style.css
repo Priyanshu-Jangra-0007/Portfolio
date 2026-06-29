@@ -1990,6 +1990,13 @@ body.menu-open {
   margin-bottom: 0.85rem;
 }
 
+.project-description {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.55;
+  margin-bottom: 0.85rem;
+}
+
 /* Tech Tags */
 .project-tags {
   display: flex;
